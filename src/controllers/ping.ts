@@ -19,11 +19,11 @@ export default class PingController {
       sort: any;
       date_created: string;
       date_updated: string;
-      drop_down_items: [];
+      drop_down_menu_list: [];
     }
   
-    const menu_items = await fetch("http://localhost:8055/items/menu_item?fields=*.*").then((result) => result.json())
-    const top_level_items = menu_items['data'].filter((item: MenuItem) => item && item['drop_down_items'].length > 0)
+    const menu_items = await fetch("https://right-look-production.up.railway.app/items/menu_item?fields=*.*").then((result) => result.json())
+    const top_level_items = menu_items['data'].filter((item: MenuItem) => item && item['drop_down_menu_list'])
     return top_level_items
   }
 }
