@@ -20,10 +20,14 @@ export default class PingController {
       date_created: string;
       date_updated: string;
       drop_down_menu_list: [];
+      is_parent: boolean;
+      has_icon: boolean;
+      
     }
   
-    const menu_items = await fetch("https://right-look-production.up.railway.app/items/menu_item?fields=*.*").then((result) => result.json())
-    const top_level_items = menu_items['data'].filter((item: MenuItem) => item && item['drop_down_menu_list'])
+    const menu_items = await fetch("https://africahornads-cms-production.up.railway.app/items/menu_item?fields=*.*&sort[]=id").then((result) => result.json())
+    const top_level_items = menu_items['data'].filter((item: MenuItem) => item && item.is_parent)
+    top_level_items.map((item: MenuItem) => item.has_icon =item && item.is_parent && item.drop_down_menu_list.length > 0)
     return top_level_items
   }
 }
